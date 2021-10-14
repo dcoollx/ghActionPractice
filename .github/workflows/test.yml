@@ -7,7 +7,7 @@
     steps:
       - run: echo "hello world"
       - uses: actions/checkout@v2
-      - run: npm i
+      - run: npm ci
       - run: npm t
   
  
