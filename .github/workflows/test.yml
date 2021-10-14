@@ -21,10 +21,12 @@
     runs-on: ubuntu-latest
     needs: unit_tests
     steps:
+      - uses: actions/checkout@v2
       - run: echo all tests passed, bumping version
       - uses: phips28/gh-action-bump-version@master
         with:
-          default: patch 
+          default: patch
+          commit-message: 'automated version bump to {{version}} [skip-ci]'
   
  
 
