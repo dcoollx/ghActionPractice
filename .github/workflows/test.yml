@@ -26,7 +26,7 @@
       - uses: phips28/gh-action-bump-version@master
         with:
           default: patch
-          commit-message: 'automated version bump to {{version}} [skip-ci]'
+
   
  
 
