@@ -1,0 +1,21 @@
+name: publish
+on:
+  - release
+env:
+  NPM_TOKEN: ${{ secrets.npm_token }}
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo releasing version 1.0 of test
+      - uses: actions/checkout@v2
+      - run: |
+          rm .npmrc
+          echo "//npm.pkg.github.com/:_authToken=\"$SERVICES_TOKEN\"" >> ~/.npmrc
+      - run: | 
+          npm ci
+          npm t
+          npm publish
+
+
+    
