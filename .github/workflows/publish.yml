@@ -10,7 +10,7 @@ jobs:
       - run: echo releasing version 1.0 of test
       - uses: actions/checkout@v2
       - run: |
-          rm .npmrc
+          rm -f .npmrc
           echo "//npm.pkg.github.com/:_authToken=\"$SERVICES_TOKEN\"" >> ~/.npmrc
       - run: | 
           npm ci
