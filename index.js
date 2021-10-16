@@ -1,7 +1,9 @@
-function main(a, b){
-    return a+b;
+const main = {
+    
+    add : (a,b)=>a+b,
+    multiply: (a,b) => a*b
 }
 
-main(4,4)
+main.add(4,4)
 
 module.exports = main;
