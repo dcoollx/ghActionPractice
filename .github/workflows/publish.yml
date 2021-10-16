@@ -14,7 +14,7 @@ jobs:
       - run: |
           rm -f .npmrc
           echo "@dcoollx:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=\"$SERVICES_TOKEN\"" > ~/.npmrc
-          echo < ~/.npmrc
+          echo `cat .npmrc`
       - run: | 
           npm ci
           npm t
