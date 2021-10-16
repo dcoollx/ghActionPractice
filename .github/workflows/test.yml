@@ -1,11 +1,8 @@
  
  name: Check if it build and passes unit test
- on: 
-  pull_request:
-    branches: 
-      - main
+ on: pull_request
  jobs:
-  build: 
+  build:
     runs-on: ubuntu-latest
     steps:
       - run: echo "this is where you would build it"
@@ -17,12 +14,6 @@
       - uses: actions/checkout@v2
       - run: npm ci
       - run: npm t
----
-# 3 dash creates a seperate document
-name: 'Assert Branch Naming Convention'
-on: pull_request
-
-jobs:
   branch-naming-rules:
     runs-on: ubuntu-latest
     steps:
@@ -33,14 +24,8 @@ jobs:
           ignore: master,develop # Ignore exactly matching branch names from convention
           min_length: 5 # Min length of the branch name
           max_length: 20 # Max length of the branch 
----
-name: PR Labeler
-on:
-  pull_request:
-    types: [opened]
-
-jobs:
   pr-labeler:
+    if: github.event.type == 'created'
     runs-on: ubuntu-latest
     steps:
       - uses: TimonVS/pr-labeler-action@v3
