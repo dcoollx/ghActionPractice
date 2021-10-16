@@ -13,8 +13,8 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           rm -f .npmrc
-          echo "//npm.pkg.github.com/:_authToken=\"$SERVICES_TOKEN\"" > ~/.npmrc
-          echo ~/.npmrc
+          echo "@dcoollx:registry=https://npm.pkg.github.com/\n//npm.pkg.github.com/:_authToken=\"$SERVICES_TOKEN\"" > ~/.npmrc
+          echo < ~/.npmrc
       - run: | 
           npm ci
           npm t
