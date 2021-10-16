@@ -1,11 +1,8 @@
  
  name: Check if it build and passes unit test
- on: 
-  pull_request:
-    branches: 
-      - main
+ on: pull_request
  jobs:
-  build: 
+  build:
     runs-on: ubuntu-latest
     steps:
       - run: echo "this is where you would build it"
@@ -17,6 +14,25 @@
       - uses: actions/checkout@v2
       - run: npm ci
       - run: npm t
+  branch-naming-rules:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: deepakputhraya/action-branch-name@master
+        with:
+          regex: '([a-z])+\/TOOLS\-\d\d\d\d' # Regex the branch should match. This example enforces grouping eg. bug/TOOLS-1911
+          allowed_prefixes: 'feature,stable,fix, e2e, testing' # All branches should start with the given prefix
+          ignore: master,develop # Ignore exactly matching branch names from convention
+          min_length: 5 # Min length of the branch name
+          max_length: 20 # Max length of the branch 
+  pr-labeler:
+    if: github.event.type == 'created'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: TimonVS/pr-labeler-action@v3
+        with:
+          configuration-path: .github/pr-labeler.yml # optional, .github/pr-labeler.yml is the default value
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
   
