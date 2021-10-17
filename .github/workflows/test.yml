@@ -1,5 +1,5 @@
  
- name: Check if it build and passes unit test
+ name: Pre PR Checks
  on: pull_request
  jobs:
   build:
@@ -25,7 +25,7 @@
           min_length: 5 # Min length of the branch name
           max_length: 20 # Max length of the branch 
   pr-labeler:
-    if: github.event.type == 'created'
+    if: ${{ github.event.type }} == opened
     runs-on: ubuntu-latest
     steps:
       - uses: TimonVS/pr-labeler-action@v3

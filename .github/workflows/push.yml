@@ -13,3 +13,7 @@ jobs:
             major-wording:  'MAJOR,cut-major'
             patch-wording:  'patch,fixes'
             default: patch
+        - uses: JS-DevTools/npm-publish@v1
+          with:
+            token: ${{ secrets.NPM_TOKEN }}
+            tag: beta

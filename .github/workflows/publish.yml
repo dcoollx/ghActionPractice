@@ -11,9 +11,6 @@ jobs:
     steps:
       - run: echo releasing version 1.0 of test
       - uses: actions/checkout@v2
-      - run: |
-          rm -f .npmrc
-          echo "//npm.pkg.github.com/:_authToken=\"$NPM_TOKEN\"" > ~/.npmrc
       - run: | 
           npm ci
           npm t
