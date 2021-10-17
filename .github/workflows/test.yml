@@ -1,5 +1,5 @@
  
- name: Check if it build and passes unit test
+ name: Pre PR Checks
  on: pull_request
  jobs:
   build:
