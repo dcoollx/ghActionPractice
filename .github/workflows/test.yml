@@ -25,7 +25,7 @@
           min_length: 5 # Min length of the branch name
           max_length: 20 # Max length of the branch 
   pr-labeler:
-    if: github.event.type == 'created'
+    if: ${{ github.event.type }} == opened
     runs-on: ubuntu-latest
     steps:
       - uses: TimonVS/pr-labeler-action@v3
