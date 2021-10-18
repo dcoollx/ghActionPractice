@@ -1,19 +1,20 @@
-on: 
+on:
   push:
     branches: [main]
-jobs: 
+jobs:
   versioning:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - run: echo all tests passed, bumping version
-        - uses: phips28/gh-action-bump-version@master
-          with:
-            minor-wording:  'add,Adds,new'
-            major-wording:  'MAJOR,cut-major'
-            patch-wording:  'patch,fixes'
-            default: patch
-        - uses: JS-DevTools/npm-publish@v1
-          with:
-            token: ${{ secrets.NPM_TOKEN }}
-            tag: beta
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo all tests passed, bumping version
+      - uses: phips28/gh-action-bump-version@master
+        with:
+          minor-wording: "add,Adds,new"
+          major-wording: "MAJOR,cut-major"
+          patch-wording: "patch,fixes"
+          default: patch
+          push: false
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: beta
