@@ -7,6 +7,8 @@ jobs:
       - run: echo "this is where you would build it"
   unit_tests:
     needs: build
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "hello world"
@@ -26,5 +28,4 @@ jobs:
         uses: TimonVS/pr-labeler-action@v3
         with:
           configuration-path: .github/pr-labeler.yml # optional, .github/pr-labeler.yml is the default value
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
