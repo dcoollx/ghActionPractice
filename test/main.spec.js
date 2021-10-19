@@ -15,4 +15,7 @@ describe('main program works',()=>{
     it('can subtract',()=>{
         expect(main.subtract(10,5)).to.equal(5)
     });
+    it('can divide',()=>{
+        expect(main.divide(10,5)).to.equal(2)
+    });
 });
