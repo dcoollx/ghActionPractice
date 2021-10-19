@@ -14,12 +14,6 @@ jobs:
       - run: | 
           npm ci
           npm t
-      - uses: phips28/gh-action-bump-version@master
-        with:
-          minor-wording: "add,Adds,new"
-          major-wording: "MAJOR,cut-major"
-          patch-wording: "patch,fixes"
-          default: patch
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
