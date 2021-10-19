@@ -1,6 +1,6 @@
 {
   "name": "ghactionpractice",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "\"practice with actions\"",
   "main": "index.js",
   "scripts": {
