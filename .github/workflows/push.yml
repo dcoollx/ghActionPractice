@@ -14,8 +14,8 @@ jobs:
           patch-wording: "patch,fixes"
           default: patch
           push: false
-      - run: git config user.email automation@audioeye.com
-      - run: git config user.name Automated Version Bump
+      - run: export GITHUB_USER=automation
+      - run: export GITHUB_EMAIL=automation@audioeye.com
       - run: npm version prerelease --preid beta -m "prerelease version %s :automation"
       - uses: JS-DevTools/npm-publish@v1
         with:
