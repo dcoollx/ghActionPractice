@@ -13,22 +13,17 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm ci
       - run: npm t
-  branch-naming-rules:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: deepakputhraya/action-branch-name@master
+      - name: branch naming rules
+        uses: deepakputhraya/action-branch-name@master
         with:
           regex: '([a-z])+\/TOOLS\-\d\d\d\d?' # Regex the branch should match. This example enforces grouping eg. bug/TOOLS-1911
           allowed_prefixes: "feature,stable,fix, e2e, testing" # All branches should start with the given prefix
           ignore: master,develop # Ignore exactly matching branch names from convention
           min_length: 5 # Min length of the branch name
           max_length: 20 # Max length of the branch
-  pr-labeler:
-    needs: branch-naming-rules
-    if: ${{ github.event.type }} == opened
-    runs-on: ubuntu-latest
-    steps:
-      - uses: TimonVS/pr-labeler-action@v3
+      - name: PR label
+        if: ${{ github.event.type }} == opened
+        uses: TimonVS/pr-labeler-action@v3
         with:
           configuration-path: .github/pr-labeler.yml # optional, .github/pr-labeler.yml is the default value
         env:
