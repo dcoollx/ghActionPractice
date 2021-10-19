@@ -25,12 +25,13 @@ jobs:
           git switch -c master
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config user.name "$GITHUB_ACTOR"
-      - run: echo ${{ steps.beta_version.outputs }}
+      - name: prerelease version
+        run: echo ${{ steps.beta_version.outputs.newTag }}
       #- run: "npm version ${{ steps.beta_version.outputs.newTag }}-beta.0 --preid beta -m 'prerelease version %s :automation'"
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          tag: beta
+      #- uses: JS-DevTools/npm-publish@v1
+        #with:
+          #token: ${{ secrets.NPM_TOKEN }}
+          #tag: beta
   versioning:
     if: false == true
     runs-on: ubuntu-latest
