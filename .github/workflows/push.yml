@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       GITHUB_USER: CI/CD
+       GITHUB_EMAIL: automation@audioeye.com
     steps:
       - uses: actions/checkout@v2
       - name: get-npm-version
@@ -16,7 +18,7 @@ jobs:
           CURRENT_VERSION : ${{ steps.package-version.outputs.current-version}}
         run: |
             git checkout -b release/$CURRENT_VERSION 
-            npm version prerelease --preid beta  
+            npm version $CURRENT_VERSION-beta.0 --preid beta  
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
