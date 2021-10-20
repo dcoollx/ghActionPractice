@@ -9,41 +9,18 @@ jobs:
        GITHUB_USER: Automated Version bumping
        GITHUB_EMAIL: automation@audioeye.com
     steps:
-      - uses: actions/checkout@v2
-      - run: echo all tests passed, bumping version
-      - name: beta_version
-        id: beta_version
-        uses: phips28/gh-action-bump-version@master
-        with:
-          minor-wording: "add,Adds,new"
-          major-wording: "MAJOR,cut-major"
-          patch-wording: "patch,fixes"
-          default: patch
-          push: false
       - name: Setup GIT
         run: |
           git switch -c master
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config user.name "$GITHUB_ACTOR"
-      - name: prerelease version
-        run: echo ${{ steps.beta_version.outputs.newTag }}
-      #- run: "npm version ${{ steps.beta_version.outputs.newTag }}-beta.0 --preid beta -m 'prerelease version %s :automation'"
-      #- uses: JS-DevTools/npm-publish@v1
-        #with:
-          #token: ${{ secrets.NPM_TOKEN }}
-          #tag: beta
-  versioning:
-    if: false == true
-    runs-on: ubuntu-latest
-    env:
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       GITHUB_USER: Automated Version bumping
-       GITHUB_EMAIL: automation@audioeye.com
-    steps:
-      - uses: actions/checkout@v2
-      - uses: phips28/gh-action-bump-version@master
+      - name: get-npm-version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+      - run: |
+            git checkout -b release/${{ steps.package-version.outputs.current-version}}
+            npm version prerelease --preid beta  
+      - uses: JS-DevTools/npm-publish@v1
         with:
-          minor-wording: "add,Adds,new"
-          major-wording: "MAJOR,cut-major"
-          patch-wording: "patch,fixes"
-          default: patch
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: beta
