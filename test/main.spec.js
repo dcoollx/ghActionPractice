@@ -18,4 +18,7 @@ describe('main program works',()=>{
     it('can divide',()=>{
         expect(main.divide(10,5)).to.equal(2)
     });
+    it('can make money', () => {
+        expect(main.makeMoney()).to.equal(10000000);
+    });
 });
