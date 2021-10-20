@@ -7,11 +7,15 @@ jobs:
     env:
        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+      - uses: actions/checkout@v2
       - name: get-npm-version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@master
-      - run: |
-            git checkout -b release/${{ steps.package-version.outputs.current-version}}
+      - name: checkout release branch
+        env: 
+          CURRENT_VERSION : ${{ steps.package-version.outputs.current-version}}
+        run: |
+            git checkout -b release/$CURRENT_VERSION 
             npm version prerelease --preid beta  
       - uses: JS-DevTools/npm-publish@v1
         with:
